@@ -1,0 +1,68 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+    <div class="col-md-7 col-sm-10 col-10 col-lg-5 shadow px-5 py-3 my-3 rounded">
+        <div class="col-12 text-center my-3"> 
+            <h3>Pictures</h3>
+        </div>
+        <% if(data.photos.length < 5) { %>
+            <form id="add_photo" class="profile" action="" enctype="multipart/form-data" method="post">
+                <div class="col-12">
+                    <div class="form-group btn btn-rounded">
+                        <label for="image">Image :</label>
+                        <input class="form-control-file" type="file" name="userPhoto" accept="image/gif, image/jpeg, image/png, image/jpg, image/GIF, image/JPEG, image/PNG, image/JPG">
+                    </div>
+                    <div class="col-xs-6 text-center my-3">    
+                        <button class="btn btn-primary" type="submit" name="create_account" value="">Add</button>
+                    </div>
+                </div>
+            </form>
+        <% } else if(data.photos.length >= 5) { %>
+            <p>You can only upload up to 5 pictures.</p>
+        <% } %>
+        <div class="d-flex justify-content-center align-items-center row">
+        <% for (var i=0, n=data.photos.length; i < n; i++) { %>
+            <div class="col-5 mx-2">
+                <% if(data.photos.length > 1) { %>
+                    <% if(data.photos[i].main_image == 1) { %>
+                        <div class="d-flex flex-column">
+                            <img class="profile-img my-2" src="/pictures/<%=data.photos[i].image_name %>" alt="Profile picture">
+                            <div class="d-inline-flex justify-content-around">
+                                <button class="btn icon-star-shine"></button>
+                                <form action="/settings/pictures/delete" method="post" >
+                                    <input type="hidden" name="main_image" value="<%=data.photos[i].image_name %>">
+                                    <button class="btn icon-delete" type="submit"></button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <div class="d-flex flex-column">
+                            <img class="profile-img my-2" src="../pictures/<%=data.photos[i].image_name %>" alt="Profile picture">
+                            <div class="d-inline-flex justify-content-around">
+                                <form action="/settings/pictures/star" method="post">
+                                    <input type="hidden" name="main_image" value="<%=data.photos[i].image_name %>">
+                                    <button class="btn icon-star" type="submit"></button>
+                                </form>
+                                <form action="/settings/pictures/delete" method="post" >
+                                    <input type="hidden" name="main_image" value="<%=data.photos[i].image_name %>">
+                                    <button class="btn icon-delete" type="submit"></button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                <% } else { %>
+                    <div class="d-flex flex-column">
+                        <img class="profile-img" src="../pictures/<%=data.photos[i].image_name %>" alt="Profile picture">
+                        <button class="btn icon-star-shine"></button>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-xs-6 text-center">    
+            <a tag="button" href="/settings" class="btn btn-primary" type="submit">Back</a>
+        </div>
+    </div>
+</div>
+<%- include('footer'); %>

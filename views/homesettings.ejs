@@ -1,0 +1,17 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+    <div class="col-md-12 text-center mb-3"> 
+        <h3>Votre profil</h3>
+    </div>
+    <div class="col-xs-6 btn-group btn-group-lg btn-group-vertical mx-auto">
+        <a href="/matchs" class="btn btn-matcha icon-cupid rounded my-3 btn-matcha-black" type="submit" name="matchs">Matchs</a>
+        <a href="/settings/profile" class="btn <%= complete == 0 ? 'btn-danger' : 'btn-info' %> rounded my-3" type="submit" name="preferences">Settings</a>
+        <a href="/settings/pictures" class="btn <%= image == 0 ? 'btn-danger' : 'btn-info' %> rounded my-3" type="submit" name="pictures">Pictures</a>
+        <!-- USE THE BUTTON BELOW TO UPDATE THE CURRENT LOCATION OF THE USER -->
+        <form action="" method="post" class="btn btn-info rounded my-3 form-btn p-0">
+            <button class="btn-inherit" type="submit" name="location">Location</button>
+        </form>
+    </div>
+</div>
+<script src="../js/navbar.js"></script>
+<%- include('footer'); %>

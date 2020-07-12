@@ -1,0 +1,15 @@
+<div class="head-menu-content">
+    <div class="menu_bell d-flex flex-column bell-select-head" onclick="sidenotif(this)">
+        <img src="/assets/utils/bell.svg" alt="arrow menu">
+        <span class="notification-alert <%= data.notifications.length > 0 ? 'notification-show' : 'notification-hide' %>"></span>
+    </div>
+    <div class="row navbar-head navbar-bell rounded shadow p-0 flex-column" id="navbar-hide">
+        <div class="p-1 text-center border-bottom"><a class="btn btn-black" href="/notifications">Notifications center.</a></div>
+        <div class="col-md-12 d-flex flex-column rounded text-center notif-list p-0 nav-bell" id="zone_notif">
+            <% if(data.notifications.length > 0) { for (var i=0, n=data.notifications.length; i < n; i++) { 
+                if(data.notifications[i].watched == 0) { %>
+                <div class="p-2 bell-notif"><span><%= data.notifications[i].type %></span></div>
+            <% } } } %>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Matcha</title>
+      <meta charset="UTF-8">
+      <link rel="icon" href="/logo_ico.ico" />
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="/css/main.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+<body>
+<div class="header">
+    <div class="header_logo">
+        <img src="/assets/utils/logo2.png" alt="logo">
+    </div>
+    <div class="header_sign">
+        <a href="/register" class="btn rounded btn-matcha">Sign up</a>
+    </div>
+</div>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+    <div class="col-9 col-md-8 col-lg-5 shadow px-5 py-3 my-4 rounded">
+        <div class="row justify-content-center my-3">
+            <h3>Connection</h3>
+            <%  if(locals.status) { %>
+                <p><%= status %></p>
+            <% } %>
+        </div>
+        <div class="col-12">
+            <form name="submit" method="post" action="/login">
+                <div class="row">
+                    <div class="col">
+                        <div class="form_div">
+                            <input class="form_input" type="text" autocomplete="off" name="username" required>
+                            <label class="form_label" for="username"><span class="label-name">Username</span></label>
+                        </div>
+                        <div class="form_div">
+                            <input class="form_input" type="password" name="password" autocomplete="off" required>
+                            <label class="form_label" for="password"><span class="label-name">Password</span></label>
+                        </div>
+                        <div class="text-center my-3">
+                            <a href="/reset" class="forgot_passwd">Reset password</a>
+                        </div>
+                        <div class="text-center my-3">
+                            <button class="btn btn-primary" type="submit">Log in</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include('offline_footer'); %>

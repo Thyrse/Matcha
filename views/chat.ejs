@@ -1,0 +1,52 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+    <div class="col-12 col-md-11 col-lg-9 border-dark rounded bg-dark">
+        <div class="row align-items-center msg-head border-bottom">
+            <div class="col-md-3 col-lg-2">
+                <a href="/matchs" class="btn btn-matcha msg-button">&#8678; Matchs</a>
+            </div>
+            <div class="col-md-9 col-lg-10 justify-content-center">
+                <div class="d-flex align-items-center justify-content-center msg-head-username">
+                    <h3><%= data.firstnames[0].first_name == firstname ? data.firstnames[1].first_name : data.firstnames[0].first_name %></h3>
+                </div>
+            </div>
+        </div>
+        <div class="row msg-body">
+            <div class="col-md-12 pt-2" id="zone_chat">
+                <% for (var i=0, n=data.record.length; i < n; i++) {
+                    if(data.record[i].user_id == userid) { %>
+                    <div class="row msg-right">
+                        <div class="col-md-5 offset-md-7 msg-content-right">
+                            <p class="speech-bubble speech-bubble-right"><%= data.record[i].message %></p>
+                        </div>
+                    </div>
+                <% } else { %>
+                    <div class="row msg-left">
+                        <div class="col-md-5 msg-content-left">
+                            <p class="speech-bubble speech-bubble-left"><%= data.record[i].message %></p>
+                        </div>
+                    </div>
+                <% } } %>
+            </div>
+        </div>
+        <form action="" method="post" id="formulaire_chat" onsubmit="return false;">
+            <div class="row msg-foot border-top">
+                <div class="col-md-9 col-lg-10 msg-new">
+                    <input class="msg-new-input" type="text" name="message" id="message" placeholder="Message..." size="50" spellcheck="false" autofocus>
+                    <input type="hidden" name="roomie" value="<%= room %>">
+                </div>
+                <div class="col-md-3 col-lg-2 text-right">
+                    <input type="hidden" value="<%= data.firstnames[0].id == userid ? data.firstnames[1].id : data.firstnames[0].id %>" name="profile_id">
+                    <button class="btn btn-matcha msg-button" type="submit" id="envoi_message" onclick="add_message(this)">Send &#8679;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha256-ijqLssetA1NMNjZ+w1zaUafQQLm4IW5OoM8O+4tatME=" crossorigin="anonymous"></script>
+
+<%- include('footer'); %>
+<script src="js/chat.js"></script>
+<script src="js/chat_messages.js"></script>

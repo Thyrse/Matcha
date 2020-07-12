@@ -1,0 +1,94 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+  <div class="col-md-7 col-sm-10 col-10 col-lg-5 shadow px-5 py-3 my-4 mx-2 rounded">
+      <div class="col-12 text-center my-3">
+          <h3>Informations</h3>
+      </div>
+      <form id="profile_update" action="/settings/profile/modify" method="post">
+          <div class="col-12">
+              <div class="form_div">
+                  <input class="form_input" type="text" name="first_name" autocomplete="off" value="<%= data.record.first_name %>" required>
+                  <label class="form_label" for="first_name"><span class="label-name">Firstname</span></label>
+              </div>
+              <div class="form_div">
+                  <input class="form_input" type="text" name="last_name" autocomplete="off" value="<%= data.record.last_name %>" required>
+                  <label class="form_label" for="last_name"><span class="label-name">Lastname</span></label>
+              </div>
+              <div class="form_div">
+                  <input class="form_input" type="number" min="18" max="99" name="birthday" autocomplete="off" maxlength="3" value="<%= data.record.birthday %>" required>
+                  <label class="form_label" for="birthday"><span class="label-name">Age</span></label>
+              </div>
+              <div class="form_div">
+                <input class="form_input" type="email" name="email" autocomplete="off" value="<%= data.record.email %>" required>
+                <label class="form_label" for="email"><span class="label-name">Email address</span></label>
+              </div>
+              <div>
+                <label for="gender">You are defining yourself as a...</label>
+                <select name="gender_id">
+                <% for (var i=0, n=data.genders.length; i < n; i++) { %>
+                  <option value="<%= data.genders[i].id %>" 
+                <% if (data.record.gender_id == data.genders[i].id) { %> selected="selected" <% } %> ><%= data.genders[i].description %>     
+                  </option>
+                <% } %>
+               </select>
+              </div>
+              <div>
+                <label for="orientation">Your sexual orientation</label>
+                <select name="orientation_id">
+                <% for (var i=0, n=data.orientations.length; i < n; i++) { %>
+                  <option value="<%= data.orientations[i].id %>" 
+                <% if (data.record.orientation_id == data.orientations[i].id) { %> selected="selected" <% } %> ><%= data.orientations[i].description %>
+                  </option>
+                <% } %>
+                </select>
+              </div>
+              <div>
+                <label for="bio">About you</label>
+                <textarea class="form-control" name="bio" placeholder="Tell us about you..." spellcheck="false" required><%- data.record.bio %></textarea>
+              </div>
+              <div>
+                <input type="checkbox" name="vegan" value="1" <% if (data.tags.length > 0 && data.tags[0].vegan == 1) { %> checked <% } %> >
+                <label for="vegan">Vegan</label>
+                <input type="checkbox" name="fitness" value="1" <% if (data.tags.length > 0 && data.tags[0].fitness == 1) { %> checked <% } %> >
+                <label for="fitness">Fitness</label>
+                <input type="checkbox" name="netflix" value="1" <% if (data.tags.length > 0 && data.tags[0].netflix == 1) { %> checked <% } %> >
+                <label for="netflix">Netflix</label>
+                <input type="checkbox" name="party" value="1" <% if (data.tags.length > 0 && data.tags[0].party == 1) { %> checked <% } %> >
+                <label for="party">Party</label>
+                <input type="checkbox" name="nature" value="1" <% if (data.tags.length > 0 && data.tags[0].nature == 1) { %> checked <% } %> >
+                <label for="nature">Nature</label>
+              </div>
+              <div class="col-xs-6 text-center my-3">
+                  <button class="btn btn-primary" type="submit">Update</button>
+              </div>
+          </div>
+      </form>
+  </div>
+  <div class="col-md-7 col-sm-10 col-10 col-lg-5 shadow px-5 py-3 my-4 mx-2 rounded">
+    <div class="col-12 text-center my-3">
+        <h3>Password</h3>
+    </div>
+  <form id="password_update" class="profile" action="/settings/profile/chgpwd" method="post">
+    <div class="col-12">
+      <div class="form_div">
+        <input class="form_input" type="password" name="password" autocomplete="off" maxlength="25" required>
+        <label class="form_label" for="password"><span class="label-name">New password</span></label>
+      </div>
+      <div class="form_div">
+        <input class="form_input" type="password" name="passwordbis" autocomplete="off" maxlength="25" required>
+        <label class="form_label" for="passwordbis"><span class="label-name">Confirm new password</span></label>
+      </div>
+      <div class="col-xs-6 text-center my-3">    
+        <button class="btn btn-primary" type="submit">Update password</button>
+      </div>
+    </div>
+  </form>
+</div>
+  <div class="col-md-12 my-2">
+      <div class="col-xs-6 text-center">
+          <a tag="button" href="/settings" class="btn btn-primary" type="submit">Back</a>
+      </div>
+  </div>
+</div>
+<script src="../js/update_settings.js"></script>
+<%- include('footer'); %>

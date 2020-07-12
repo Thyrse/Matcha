@@ -1,0 +1,122 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4 main-content-home">
+    <div class="col-10 col-sm-9 col-lg-6 col-xl-5 p-2 border m-2 card-user rounded">
+        <div class="card-display">
+            <div class="text-center home-card">
+                <% if(data.picture.length > 1) { %>
+                    <button class="btn prev" onclick="plusSlides(-1)">&#10094;</button>
+                    <button class="btn next" onclick="plusSlides(1)">&#10095;</button>
+                <% } %>
+                <% for (var i=0, n=data.picture.length; i < n; i++) { %>
+                    <img class="card-slide img-thumbnail fade show" src="pictures/<%=data.picture[i].image_name %>" alt="Profile picture">
+                <% } %>
+            </div>
+            <div class="d-flex justify-content-center my-1">
+                <% for (var i=0, n=data.picture.length; i < n; i++) { %>
+                    <span class="picture-card mx-1" onclick="currentSlide(<%= i+1 %>)"></span>
+                <% } %>
+            </div>
+            <div class="d-flex justify-content-between my-2 secondary-info">
+                <span>Age : <%= data.record[0].birthday %></span>
+                <div class="d-flex align-items-center">
+                    <% if(locals.connected) { %>
+                        <span class="connected-status-true" title="Online"></span>
+                    <% } else { %>
+                        <span class="connected-status-false" title="Offline"></span>
+                    <% } %>
+                  <span class="ml-2"><strong><%= data.record[0].first_name + " " + data.record[0].last_name %></strong></span>
+                </div>
+                <% if(data.distance != null) { %>
+                    <span><%= data.distance %> km</span>
+                <% } %>
+            </div>
+            <div class="d-flex justify-content-between my-2 secondary-info">
+                <span><%= data.record[0].gender_id == 1 ? "Man" : "Woman" %></span>
+                <span><%= data.record[0].orientation_id == 1 ? "Straight" : data.record[0].orientation_id == 2 ? "Gay" : "Bisexual" %></span>
+            </div>
+            <div class="d-flex mt-2 card-bio primary-info" v-if="$route.name != 'Home'">
+              <p class="m-0"><%= data.record[0].bio %></p>
+            </div>
+                  <!-- Si c'est un profil on peut like ou nop, sinon on peut supprimer le match ou discuter avec -->
+            <div class="d-flex flex-column card-bottom">
+              <div class="d-flex justify-content-around my-3">
+                <!-- IF THERE IS A MATCH -->
+                <% if(data.matches.length > 0) { %>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=unmatch">
+                        <input type="hidden" name="match_id" value="<%= data.matches[0].id_match %>">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" value="<%= data.record[0].id %>" name="profile_id">
+                        <button class="btn btn-danger btn-sm" type="submit" onclick="nomatch(this)">Unmatch</button>
+                    </form>
+                <% } else if(data.likes.length) { %>
+                    <!-- IF THE USER WE ARE LOOKING ALREADY LIKED US -->
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=match">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-matcha btn-sm" type="submit" onclick="match(this)">Match</button>
+                    </form>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=pass">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-danger btn-sm" type="submit">Pass</button>
+                    </form>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=block">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-dark btn-sm" type="submit">Block</button>
+                    </form>
+                <% } else if(data.unlikes.length) { %>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=unlike">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-danger btn-sm" type="submit">Unlike</button>
+                    </form>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=block">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-dark btn-sm" type="submit">Block</button>
+                    </form>
+                <% } else { %>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=like">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-success btn-sm" type="submit" onclick="like(this)">Like</button>
+                    </form>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=pass">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-danger btn-sm" type="submit">Pass</button>
+                    </form>
+                    <form method="post" action="/profile?user=<%= data.record[0].username%>&action=block">
+                        <input type="hidden" name="popularity" value="<%= data.record[0].popularity %>">
+                        <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                        <button class="btn btn-dark btn-sm" type="submit">Block</button>
+                    </form>
+                <% } %>
+                <form method="post" action="/profile?user=<%= data.record[0].username%>&action=report">
+                    <input type="hidden" name="profile_id" value="<%= data.record[0].id %>">
+                    <button class="btn btn-secondary btn-sm" type="submit">Report as fake</button>
+                </form>
+              </div>
+              <div class="secondary-info">
+                <span>Last connection: <%= data.record[0].last_login %></span>
+              </div>
+              <div class="d-flex justify-content-between my-2 secondary-info">
+                <% if(data.tags.length >= 1) { %>
+                  <span><% if(data.tags[0].vegan == 1) { %> #Vegan <% } %>
+                    <% if(data.tags[0].fitness == 1) { %> #Fitness <% } %>
+                    <% if(data.tags[0].nature == 1) { %> #Nature <% } %>
+                    <% if(data.tags[0].netflix == 1) { %> #Netflix <% } %>
+                    <% if(data.tags[0].party == 1) { %> #Party <% } %></span>
+                <% } %>
+                  <span>Popularity score : <%= data.record[0].popularity %></span>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/carousel.js"></script>
+<%- include('footer'); %>

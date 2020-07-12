@@ -1,0 +1,23 @@
+<%- include('head'); %>
+<div class="container row mx-auto d-flex justify-content-center my-4"> 
+    <div class="col-11 col-lg-7 col-xl-6 col-sm-11 col-md-9 p-2 shadow m-2 card-user rounded">
+        <% if(data.notif.length > 0) { %>
+            <div class="d-flex justify-content-center my-3">
+                <form action="" method="post">
+                    <button class="btn btn-matcha">Mark as read</button>
+                </form>
+            </div>
+            <% for (var i=0, n=data.notif.length; i < n; i++) { %>
+                <div class="p-2 my-1 bell-notif <%= data.notif[i].watched == 1 ? 'notif-read' : 'notif-unread' %>">
+                    <span><%= data.notif[i].type %></span>
+                </div>
+        <% } } else { %>
+            <div class="text-center mt-2">
+                <p>You dont have any notification.</p>
+            </div>
+        <% } %>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<%- include('footer'); %>

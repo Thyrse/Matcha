@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Matcha</title>
+      <meta charset="UTF-8">
+      <link rel="icon" href="/logo_ico.ico" />
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="/css/main.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+<body>
+<div class="header">
+    <div class="header_logo">
+        <img src="/assets/utils/logo2.png" alt="logo">
+    </div>
+    <div class="header_sign">
+        <a href="/login" class="btn rounded btn-matcha">Sign in</a>
+    </div>
+</div>
+<div class="container row mx-auto d-flex justify-content-center my-4">
+    <div class="col-9 col-md-8 col-lg-5 shadow px-5 py-3 my-4 rounded">
+        <div class="col-12 text-center my-3"> 
+            <h3>Registration</h3>
+            <div>
+                <%  if(locals.registration) { %>
+                    <p><%= registration %></p>
+                <% } %>
+            </div>
+        </div>
+        <form name="submit" method="post" action="/register">
+            <div class="col-12">
+                <div class="form_div">
+                    <input class="form_input" type="text" autocomplete="off" name="username" required>
+                    <label class="form_label" for="username"><span class="label-name">Username</span></label>
+                </div>
+                <div class="form_div">
+                    <input class="form_input" type="text" autocomplete="off" name="last_name" required>
+                    <label class="form_label" for="last_name"><span class="label-name">Lastname</span></label>
+                </div>
+                <div class="form_div">
+                    <input class="form_input" type="text" autocomplete="off" name="first_name" required>
+                    <label class="form_label" for="first_name"><span class="label-name">Firstname</span></label>
+                </div>
+                <div class="form_div">
+                    <input class="form_input" type="email" name="email" autocomplete="off" required>
+                    <label class="form_label" for="email"><span class="label-name">Email address</span></label>
+                </div>
+                <div class="form_div">
+                    <input class="form_input" type="password" name="password" autocomplete="off" required>
+                    <label class="form_label" for="password"><span class="label-name">Password</span></label>                
+                </div>
+                <div class="form_div">
+                    <input class="form_input" type="password" name="passwordbis" autocomplete="off" required>
+                    <label for="passwordbis" class="form_label"><span class="label-name">Confirm your password</span></label>
+                </div>
+                <div class="text-center my-3">    
+                    <button class="btn btn-primary" type="submit">Sign up</button>
+                </div>    
+            </div>
+        </form>
+    </div>
+</div>
+<%- include('offline_footer'); %>
