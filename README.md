@@ -2,7 +2,7 @@
 
 ### About
 
-Dating site allowing user to find their soulmate. Contains a popularity system and every classic feature usually found on a dating site including filters like distance, age, sexual orientation, etc.
+Dating site allowing users to find their soulmate. Contains a popularity system and every classic feature usually found on a dating site including filters like distance, age, sexual orientation, etc.
 
 ## Techs
 
