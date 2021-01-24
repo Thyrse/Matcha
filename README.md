@@ -1,17 +1,38 @@
-Projet Matcha
+# Matcha
 
-Featuring :
-Terry F.
-Gwenaelle G.
+### About
 
-Lancer le projet :
+Dating site allowing user to find their soulmate. Contains a popularity system and every classic feature usually found on a dating site including filters like distance, age, sexual orientation, etc.
 
-- Installation des dépendances -
-`rm -rf node_modules` (si le dossier est présent)
-`npm install`
+## Techs
 
-- Création de la base de données -
-`mysql -u root -p < config/setup.sql`
+### Back-end
 
-- Lancement du serveur -
-`nodemon app.js`
+- Node
+- MySQL
+- Express
+
+### Front-end
+
+- Bootstrap
+- Sass
+- Socket.io
+
+### API
+
+- Mailjet
+- Fakerator
+- Google maps
+
+## Installation
+
+`npm install && mysql -u root -p < config/setup.sql && nodemon app.js`
+
+## Some screenshots
+
+![LoginPage](https://i.imgur.com/zMwgnwJ.png)
+![SettingsPage](https://i.imgur.com/k03A3UF.png)
+![HomePage](https://i.imgur.com/e58lae1.png)
+![ChatPage](https://i.imgur.com/CYoAN5r.png)
+![FiltersPage](https://i.imgur.com/LfzTtvH.png)
+![ProfilePage](https://i.imgur.com/V5gpBD8.png)
